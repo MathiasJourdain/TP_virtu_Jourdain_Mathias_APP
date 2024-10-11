@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  namespace: front
+spec:
+  replicas: 2  # Déploie 2 replicas
+  selector:
+    matchLabels:
+      app: reverse-proxy
+  template:
+    metadata:
+      labels:
+        app: reverse-proxy  # Label des Pods
+    spec:
+      containers:
+      - name: nginx 
+        image: nginx:1.27.1-alpine
+    volumeMounts:
+        - name: nginx-config-volume
+          mountPath: /etc/nginx/conf.d
+        ports:
+        - containerPort: 80  # Port exposé

@@ -1,0 +1,12 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: mon-application
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: mon-application 
+  minReplicas: 1  
+  maxReplicas: 5  
+  targetCPUUtilizationPercentage: 1
